@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto Mono', Consolas, 'Courier New', Courier, monospace;
+    margin: 0;
+    color: #222;
+}
+
+.header {
+    display: flex;
+    align-items: baseline;
+    padding: 0 12px;
+    border-bottom: 2px solid #ccc;
+}
+
+.header-title {
+    margin: 12px;
+    margin-left: 0;
+}
+
+.header-nav {
+    flex: 1;
+}
+
+.header ul {
+    list-style: none;
+    padding: 0;
+}
+
+.header a {
+    color: inherit;
+}
+
+.view {
+    display: flex;
+    max-width: 960px;
+    margin: auto;
+}
+
+.facts, .tools {
+    flex: 1;
+    padding: 4px 12px;
+}
+
+.case-selector {
+    margin-top: 12px;
+    text-align: center;
+}
+

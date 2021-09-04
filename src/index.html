@@ -2,11 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Hacker</title>
 </head>
 <body>
-    <div id="root"></div>
+    <header class="header">
+        <h1 class="header-title">Password Hacker</h1>
+        <nav class="header-nav">
+            <ul>
+                <li><a href="#tutorial">Tutorial</a></li>
+            </ul>
+        </nav>
+        <p><small><a href="https://github.com/math2001/password-hacker">math2001/password-hacker</a></small></p>
+    </header>
+    <section class="view">
+        <article class="facts" id="facts">
+            <h3>Facts</h3>
+            <ul id="facts-list" class="facts-list"></ul>
+        </article>
+        <article class="tools" id="tools">
+            <h3>Tools</h3>
+            <p>
+                <label for="tools-manual-try">Try a password: </label>
+                <input type="text" id="tools-manual-try">
+            </p>
+        </article>
+    </section>
+    <div class="case-selector">
+        <span class="case-before" id="case-before">&lt;</span>
+        <span class="case-number">1</span>
+        <span class="case-after" id="case-after">&gt;</span>
+    </div>
 </body>
 </html>
