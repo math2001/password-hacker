@@ -2,28 +2,14 @@ import "./css/index.css"
 import "./css/facts.css"
 import "./css/tools.css"
 
-import "./ts/infos.ts"
+import "./ts/database.ts"
+import { Facts } from "./ts/components/facts"
+import { Tools } from "./ts/components/tools"
+import { EM } from "./ts/EventManager"
 
-import { EM } from "./ts/em"
-
-EM.on("foo", (data: string) => {
-    console.log(data)
-})
-// should err
-EM.on("foo", (data: number) => {
-    console.log(data)
-})
-
-EM.on("bar", (data: number) => {
-    console.log(data)
-})
-
-// should err
-EM.on("bar", (data: string) => {
-    console.log(data)
-})
-
-// should err 
-EM.on("kk", (data: string) => {
-
+document.addEventListener("DOMContentLoaded", () => {
+    const tools = new Tools()
+    const facts = new Facts()
+    
+    EM.emit("set-case", 0)
 })

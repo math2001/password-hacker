@@ -10,3 +10,9 @@ export function debounce(delayMS: number, func: (a: any) => any) {
     timer = setTimeout(func, delayMS, event);
   };
 }
+
+export function querySelector<T extends HTMLElement>(selector: string, parent:HTMLElement|Document=document): T {
+  const el = parent.querySelector<T>(selector)
+  assert(el !== null)
+  return el
+}

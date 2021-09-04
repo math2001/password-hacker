@@ -1,6 +1,5 @@
 export interface Events {
-    foo: string;
-    bar: number;
+    'set-case': number;
 }
 
 interface keystring {
@@ -16,6 +15,7 @@ export class EventManager<T extends keystring> {
 
     on<K extends Extract<keyof T, string>, D extends T[K]>(event: K, cb: (data: D) => void) {
         if (!this.events[event]) this.events[event] = []
+        this.events[event]?.push(cb)
     }
 
     emit<K extends Extract<keyof T, string>, D extends T[K]>(event: K, data: D) {

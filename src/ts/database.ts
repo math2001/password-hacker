@@ -1,7 +1,13 @@
 // password are base64 so that some smarty student can't just read the source
 // code to get all of the answer, at least he/she has to learn about base64.
 
-export const database = [
+export type Facts = string[]
+export interface CaseData {
+    password: string;
+    facts: Facts;
+}
+
+export const database: CaseData[] = [
     {
         "password": "anVsaWUxMQ==",
         "facts": [
