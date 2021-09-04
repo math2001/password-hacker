@@ -13,3 +13,46 @@ input:focus {
     border-left-width: 4px;
     padding-left: 3px;
 }
+
+.manual-try-result {
+    display: none;
+}
+
+.manual-try-result[data-result-type="success"] {
+    background-color: var(--light-green);
+    color: var(--dark-green);
+}
+.manual-try-result[data-result-type="fail"] {
+    background-color: var(--light-red);
+    color: var(--dark-red);
+}
+
+.manual-try-result :first-child {
+    font-size: 32px;
+    line-height: 32px;
+    display: flex;
+    /* width: 48px; */
+    padding: 0 8px;
+    align-items: center;
+    justify-content: center;
+    margin: 4px 0;
+}
+
+.manual-try-result :last-child  {
+    display: inline-flex;
+    font-size: 16px;
+    justify-content: center;
+    width: 28px;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    cursor: pointer;
+    color: inherit;
+}
+
+.manual-try-result-message {
+    flex: 1;
+    align-self: center;
+    margin: 4px 0;
+}

@@ -13,7 +13,6 @@ export class Facts {
         }
 
         EM.on("set-case", (index: number) => {
-            console.log('foo')
             assert(index >= 0)
             assert(index < database.length)
             const data = database[index];

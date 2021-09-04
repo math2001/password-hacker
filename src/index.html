@@ -26,10 +26,17 @@
         </article>
         <article class="tools" id="tools">
             <h3>Tools</h3>
-            <p>
-                <label for="tools-manual-try">Try a password: </label>
-                <input type="text" id="tools-manual-try">
-            </p>
+            <form action="#" id="tools-manual-try-form">
+                <p>
+                    <label for="tools-manual-try">Try a password: </label>
+                    <input type="text" id="tools-manual-try">
+                </p>
+                <div class="manual-try-result" id="tools-manual-try-result">
+                    <span id="tools-manual-try-result-symbol">x</span>
+                    <span id="tools-manual-try-result-message" class="manual-try-result-message"></span>
+                    <button id="tools-manual-try-result-close">&times;</button>
+                </div>
+            </form>
         </article>
     </section>
     <div class="case-selector">

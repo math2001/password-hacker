@@ -4,8 +4,15 @@
 
 body {
     font-family: 'Roboto Mono', Consolas, 'Courier New', Courier, monospace;
+    font-size: 14px;
     margin: 0;
     color: #222;
+
+    --light-green: lightgreen;
+    --dark-green: darkgreen;
+
+    --light-red: #FF7F7F;
+    --dark-red: darkred;
 }
 
 .header {
