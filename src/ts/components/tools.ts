@@ -38,12 +38,17 @@ export class Tools {
             const caseData: CaseData = database[this.caseIndex];
             this._displayManualResult(database[this.caseIndex].password === btoa(this.elements.manualTry.value))
         })
+
+        this.elements.manualTryResultClose.addEventListener('click', e => {
+            e.preventDefault()
+            this.elements.manualTryResult.classList.add("hidden")
+        })
     }
 
     _displayManualResult(correctPassword: boolean) {
         this.elements.manualTryResultMessage.textContent = correctPassword ? MANUAL_RESULT_SUCCESS : MANUAL_RESULT_FAIL;
         this.elements.manualTryResultSymbol.textContent = correctPassword ? '✓' : '✗';
-        this.elements.manualTryResult.style.display = 'flex'
+        this.elements.manualTryResult.classList.remove("hidden")
         this.elements.manualTryResult.setAttribute("data-result-type", correctPassword ? 'success' : 'fail')
     }
 }

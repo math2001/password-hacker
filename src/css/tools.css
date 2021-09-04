@@ -15,6 +15,10 @@ input:focus {
 }
 
 .manual-try-result {
+    display: flex;
+    color: red;
+}
+.manual-try-result.hidden {
     display: none;
 }
 
