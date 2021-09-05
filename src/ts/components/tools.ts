@@ -3,8 +3,6 @@ import { EM } from "../EventManager";
 import { assert, escapeHTML, querySelector } from "../utils"
 import { AlertBox } from "./alertbox";
 
-const MANUAL_RESULT_FAIL = "Nope"
-const MANUAL_RESULT_SUCCESS = "YES! Well done! So, do you think that was good password?"
 
 export class Tools {
     elements: {
@@ -16,7 +14,10 @@ export class Tools {
     };
     caseIndex: number;
     commonPasswords: string[]
-    manualTryResult: AlertBox;
+    alerts: {
+        manualTry: AlertBox;
+        commonPasswords: AlertBox
+    }
 
     constructor(commonPasswords: string[]) {
         this.commonPasswords = commonPasswords;
@@ -29,21 +30,29 @@ export class Tools {
             explainCommon: querySelector("#tools-explain-common"),
         }
         this.caseIndex = 0;
-        this.manualTryResult = new AlertBox('#tools-manual-try-result')
+        this.alerts = {
+            manualTry: new AlertBox('#tools-manual-try-alert'),
+            commonPasswords: new AlertBox("#tools-common-passwords-alert"),
+        } 
 
         EM.on("set-case", (index: number) => {
             assert(index >= 0);
             assert(index < database.length)
             this.caseIndex = index;
 
-            this.manualTryResult.hide()
+            this.alerts.manualTry.hide()
+            this.alerts.commonPasswords.hide()
             this.elements.manualTryForm.reset()
         })
 
         this.elements.manualTryForm.addEventListener("submit", e => {
             e.preventDefault()
-            const caseData: CaseData = database[this.caseIndex];
-            this._displayManualResult(database[this.caseIndex].password === btoa(this.elements.manualTry.value))
+            const password = escapeHTML(this.elements.manualTry.value);
+            if (database[this.caseIndex].password === btoa(this.elements.manualTry.value)) {
+                this.alerts.manualTry.show("success", "Yep, that's the password!")
+            } else {
+                this.alerts.manualTry.show("failure", `Nope, <i>${password}</i> isn't correct.`)
+            }
         })
 
         this.elements.tryCommon.addEventListener('click', e => {
@@ -56,21 +65,12 @@ export class Tools {
                     break
                 }
             }
-            this._displayCommonPasswordsResult(found ? password : null)
+            if (found) {
+                this.alerts.commonPasswords.show("success", `Found the password! It's <i>${password}</i>`)
+            } else {
+                this.alerts.commonPasswords.show("failure", `Nah, couldn't find the password`)
+            }
         })
     }
 
-    private _displayManualResult(correctPassword: boolean) {
-        const password = escapeHTML(this.elements.manualTry.value);
-        if (correctPassword) {
-            this.manualTryResult.show("success", MANUAL_RESULT_SUCCESS)
-        } else {
-            this.manualTryResult.show("failure", `Nope, <code>${password}</code> isn't correct.`)
-        }
-    }
-
-    private _displayCommonPasswordsResult(password: string | null) {
-        // this.elements.commonPasswordsResult.classList.remove('hidden')
-        // if (password === null) {}
-    }
 }
