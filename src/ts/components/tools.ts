@@ -31,6 +31,8 @@ export class Tools {
             assert(index >= 0);
             assert(index < database.length)
             this.caseIndex = index;
+
+            this.elements.manualTryResult.classList.add("hidden")
         })
 
         this.elements.manualTryForm.addEventListener("submit", e => {
