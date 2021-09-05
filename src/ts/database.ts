@@ -16,5 +16,14 @@ export const database: CaseData[] = [
             "She has a dog, called Max.",
             "She is born on 12 February 2011.",
         ]
+    },
+    {
+        "password": "cGFzc3dvcmQ=",
+        "facts": [
+            "His name is Andrew",
+            "He lives in Sydney, Australia",
+            "He loves riding his mountain bike",
+            "He has 2 brothers"
+        ]
     }
 ]
