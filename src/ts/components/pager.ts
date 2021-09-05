@@ -24,6 +24,7 @@ export class Pager {
             this.index = index;
             this.elements.before.disabled = index === 0
             this.elements.after.disabled = index === database.length - 1
+            this.elements.number.textContent = (this.index + 1).toString()
         })
 
         this.elements.before.addEventListener('click', e => {
