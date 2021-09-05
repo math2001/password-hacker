@@ -58,3 +58,14 @@ body {
     text-align: center;
 }
 
+button {
+    font-size: inherit;
+    font-family: inherit;
+    background: none;
+    border: 1px solid grey;
+    padding: 5px;
+    cursor: pointer;
+}
+button:hover {
+    border-color: #222;
+}

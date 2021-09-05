@@ -16,3 +16,9 @@ export function querySelector<T extends HTMLElement>(selector: string, parent:HT
   assert(el !== null)
   return el
 }
+
+export function escapeHTML(html: string): string {
+  const el = document.createElement('span')
+  el.textContent = html
+  return el.innerHTML
+}
