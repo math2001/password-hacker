@@ -7,7 +7,7 @@ const MANUAL_RESULT_SUCCESS = "YES! Well done! So, do you think that was good pa
 
 export class Tools {
     elements: {
-        manualTryForm: HTMLFontElement;
+        manualTryForm: HTMLFormElement;
         manualTry: HTMLInputElement;
         manualTryResult: HTMLElement;
         manualTryResultMessage: HTMLElement;
@@ -33,6 +33,7 @@ export class Tools {
             this.caseIndex = index;
 
             this.elements.manualTryResult.classList.add("hidden")
+            this.elements.manualTryForm.reset()
         })
 
         this.elements.manualTryForm.addEventListener("submit", e => {
