@@ -29,7 +29,7 @@
             <form action="#" id="tools-manual-try-form">
                 <p>
                     <label for="tools-manual-try">Try a password: </label>
-                    <input type="text" id="tools-manual-try">
+                    <input type="text" id="tools-manual-try" autocomplete="off">
                 </p>
                 <div class="manual-try-result hidden" id="tools-manual-try-result">
                     <span id="tools-manual-try-result-symbol">x</span>
@@ -39,10 +39,10 @@
             </form>
         </article>
     </section>
-    <div class="case-selector">
-        <span class="case-before" id="case-before">&lt;</span>
-        <span class="case-label">Case <span id="case-number">1</span></span>
-        <span class="case-after" id="case-after">&gt;</span>
+    <div class="case-pager">
+        <button class="case-before" id="case-before">&lt;</button>
+        <span class="case-label">Case <span id="case-number">1</span>/<span id="case-total">1</span></span>
+        <button class="case-after" id="case-after">&gt;</button>
     </div>
 </body>
 </html>

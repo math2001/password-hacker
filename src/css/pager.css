@@ -1,0 +1,18 @@
+.case-before, .case-after {
+    display: inline-block;
+    cursor: pointer;
+    /* outline: 1px solid black; */
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    border: none;
+    background: none;
+}
+.case-before:hover, .case-after:hover {
+    text-decoration: underline;
+}
+
+.case-before[disabled]:hover,
+.case-after[disabled]:hover {
+    text-decoration: none;
+}
