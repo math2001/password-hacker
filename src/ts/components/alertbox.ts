@@ -3,6 +3,7 @@ import { querySelector } from "../utils";
 const symbols = {
     "failure": '✗',
     "success": '✓',
+    "info": "ⓘ"
 }
 
 export class AlertBox {
@@ -27,6 +28,14 @@ export class AlertBox {
         this.elements.box.setAttribute('data-alert-type', type)
         this.elements.symbol.textContent = symbols[type]
         this.elements.message.innerHTML = messageHTML;
+    }
+
+    toggle = (type: Extract<keyof typeof symbols, string>, messageHTML: string) => {
+        if (this.elements.box.classList.contains('hidden')) {
+            this.show(type, messageHTML)
+        } else {
+            this.hide()
+        }
     }
 
     hide = () => {

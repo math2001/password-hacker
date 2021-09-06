@@ -1,5 +1,6 @@
 .alertbox {
     display: flex;
+    margin: 12px 4px;
 }
 .alertbox.hidden {
     display: none;
@@ -12,6 +13,9 @@
 .alertbox[data-alert-type="failure"] {
     background-color: var(--light-red);
     color: var(--dark-red);
+}
+.alertbox[data-alert-type="info"] {
+    background-color: #eee;
 }
 
 .alertbox-symbol {

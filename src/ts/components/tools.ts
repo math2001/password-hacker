@@ -3,6 +3,23 @@ import { EM } from "../EventManager";
 import { assert, escapeHTML, querySelector } from "../utils"
 import { AlertBox } from "./alertbox";
 
+const COMMON_PASSWORDS_HELP = `<p>Some passwords are used a lot, like
+<i>123456</i>, <i>superman</i> or <i>qwerty</i>. So hackers have made lists of
+the most common passwords, and then test them all when trying to break into your
+account.</p>
+
+<p>
+<a href="https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10-million-password-list-top-10000.txt">Some</a>
+<a href="https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10k-most-common.txt">lists</a>
+<a href="https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10-million-password-list-top-1000000.txt">are</a>
+publicly available.
+</p>
+
+<p>
+This button tests every single password in
+<a href="https://raw.githubusercontent.com/DavidWittman/wpxmlrpcbrute/master/wordlists/1000-most-common-passwords.txt">this list</a>.
+</p>
+`
 
 export class Tools {
     elements: {
@@ -16,7 +33,8 @@ export class Tools {
     commonPasswords: string[]
     alerts: {
         manualTry: AlertBox;
-        commonPasswords: AlertBox
+        commonPasswords: AlertBox;
+        commonPasswordsHelp: AlertBox;
     }
 
     constructor(commonPasswords: string[]) {
@@ -32,7 +50,8 @@ export class Tools {
         this.caseIndex = 0;
         this.alerts = {
             manualTry: new AlertBox('#tools-manual-try-alert'),
-            commonPasswords: new AlertBox("#tools-common-passwords-alert"),
+            commonPasswords: new AlertBox("#tools-common-passwords-result"),
+            commonPasswordsHelp: new AlertBox("#tools-common-passwords-help"),
         } 
 
         EM.on("set-case", (index: number) => {
@@ -42,6 +61,7 @@ export class Tools {
 
             this.alerts.manualTry.hide()
             this.alerts.commonPasswords.hide()
+            // this.alerts.commonPasswordsHelp.hide()
             this.elements.manualTryForm.reset()
         })
 
@@ -70,6 +90,11 @@ export class Tools {
             } else {
                 this.alerts.commonPasswords.show("failure", `Nah, couldn't find the password`)
             }
+        })
+
+        this.elements.explainCommon.addEventListener('click', e => {
+            e.preventDefault()
+            this.alerts.commonPasswordsHelp.toggle("info", COMMON_PASSWORDS_HELP)
         })
     }
 
