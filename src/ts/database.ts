@@ -18,7 +18,7 @@ export const database: CaseData[] = [
     ],
   },
   {
-    password: "Zm9vdGJhbGw=",
+    password: "c2VjcmV0",
     facts: [
       "His name is Andrew",
       "He lives in Sydney, Australia",

@@ -12,5 +12,13 @@ input:focus {
   /* border-color: black; */
   /* border-left-width: 4px;
     padding-left: 3px; */
-  outline: 2px solid var(--light-grey);
+  outline: 1px solid var(--light-grey);
+}
+
+.tools-try-common-status {
+  font-style: italic;
+}
+
+.tools-try-common-status.hidden {
+  display: none;
 }

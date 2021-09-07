@@ -1,4 +1,5 @@
 import "../../css/alertbox.css";
+import { EM } from "../EventManager";
 import { querySelector } from "../utils";
 
 const symbols = {
@@ -43,6 +44,7 @@ export class AlertBox {
   };
 
   hide = () => {
+    EM.emit("alert-close", this);
     this.elements.box.classList.add("hidden");
   };
 

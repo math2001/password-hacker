@@ -1,4 +1,7 @@
+import { AlertBox } from "./components/alertbox";
+
 export interface Events {
+  "alert-close": AlertBox;
   "set-case": number;
 }
 

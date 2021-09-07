@@ -1,6 +1,6 @@
 import { database } from "../database";
 import { EM } from "../EventManager";
-import { assert, escapeHTML, querySelector } from "../utils";
+import { assert, escapeHTML, querySelector, sleep } from "../utils";
 import { AlertBox } from "./alertbox";
 import { Tabs } from "./tabs";
 
@@ -13,12 +13,12 @@ account.</p>
 <a href="https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10-million-password-list-top-10000.txt">Some</a>
 <a href="https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10k-most-common.txt">lists</a>
 <a href="https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10-million-password-list-top-1000000.txt">are</a>
-publicly available.
+<a href="https://raw.githubusercontent.com/DavidWittman/wpxmlrpcbrute/master/wordlists/1000-most-common-passwords.txt">publicly</a>
+available.
 </p>
 
 <p>
-This button tests every single password in
-<a href="https://raw.githubusercontent.com/DavidWittman/wpxmlrpcbrute/master/wordlists/1000-most-common-passwords.txt">this list</a>.
+This button tests every single password in <a href="/assets/common-passwords-list.txt">this list</a>.
 </p>
 `;
 
@@ -29,6 +29,13 @@ export class Tools {
 
     tryCommon: HTMLButtonElement;
     explainCommon: HTMLButtonElement;
+
+    commonStatusBar: {
+      bar: HTMLElement;
+      index: HTMLElement;
+      total: HTMLElement;
+      current: HTMLElement;
+    };
   };
   caseIndex: number;
   commonPasswords: string[];
@@ -47,13 +54,24 @@ export class Tools {
 
       tryCommon: querySelector("#tools-try-common"),
       explainCommon: querySelector("#tools-explain-common"),
+
+      commonStatusBar: {
+        bar: querySelector("#tools-try-common-status"),
+        index: querySelector("#tools-try-common-index"),
+        total: querySelector("#tools-try-common-total"),
+        current: querySelector("#tools-try-common-current"),
+      },
     };
+
     this.caseIndex = 0;
     this.alerts = {
       manualTry: new AlertBox("#tools-manual-try-alert"),
       commonPasswords: new AlertBox("#tools-common-passwords-result"),
       commonPasswordsHelp: new AlertBox("#tools-common-passwords-help"),
     };
+
+    this.elements.commonStatusBar.total.textContent =
+      commonPasswords.length.toString();
 
     new Tabs(querySelector(".tab-section", querySelector("#tools")));
     this.alerts.commonPasswordsHelp.show("info", COMMON_PASSWORDS_HELP);
@@ -85,16 +103,18 @@ export class Tools {
       }
     });
 
-    this.elements.tryCommon.addEventListener("click", (e) => {
+    EM.on("alert-close", (alertbox: AlertBox) => {
+      if (alertbox === this.alerts.commonPasswords) {
+        this.elements.commonStatusBar.bar.classList.add("hidden");
+      }
+    });
+
+    this.elements.tryCommon.addEventListener("click", async (e) => {
+      this.alerts.commonPasswords.hide();
+      this.elements.commonStatusBar.bar.classList.remove("hidden");
       // don't binary search, we simulate brute force testing
       const password = atob(database[this.caseIndex].password);
-      let found = false;
-      for (let cp of commonPasswords) {
-        if (cp === password) {
-          found = true;
-          break;
-        }
-      }
+      const found = await this.runCommonPasswordsAnimation(password);
       if (found) {
         this.alerts.commonPasswords.show(
           "success",
@@ -112,5 +132,19 @@ export class Tools {
       e.preventDefault();
       this.alerts.commonPasswordsHelp.toggle("info", COMMON_PASSWORDS_HELP);
     });
+  }
+
+  private async runCommonPasswordsAnimation(truePassword: string) {
+    let i = 1;
+    for (let cp of this.commonPasswords) {
+      this.elements.commonStatusBar.index.textContent = i.toString();
+      this.elements.commonStatusBar.current.textContent = cp;
+      await sleep(100);
+      if (cp === truePassword) {
+        return true;
+      }
+      i++;
+    }
+    return false;
   }
 }
