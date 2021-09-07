@@ -1,4 +1,3 @@
-import "./css/alertbox.css";
 import "./css/facts.css";
 import "./css/index.css";
 import "./css/pager.css";

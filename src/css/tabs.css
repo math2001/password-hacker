@@ -1,0 +1,30 @@
+/* .nav-tabs {
+  border: 1px solid black;
+} */
+
+.nav-tabs {
+  display: flex;
+}
+
+.nav-tabs > button {
+  border: 1px solid grey;
+  padding: 2px 12px;
+  background: none;
+  margin: 0;
+}
+
+.nav-tabs > button:not(:first-child) {
+  border-left: none;
+}
+
+.nav-tabs > button.tab-selected {
+  border-bottom: none;
+}
+
+[data-tab-id] {
+  display: none;
+}
+
+[data-tab-id].tab-selected {
+  display: block;
+}

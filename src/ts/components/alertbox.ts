@@ -1,3 +1,4 @@
+import "../../css/alertbox.css";
 import { querySelector } from "../utils";
 
 const symbols = {

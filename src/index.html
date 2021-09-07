@@ -33,30 +33,40 @@
         >
       </p>
     </header>
-    <section class="view">
-      <article class="facts" id="facts">
+    <div class="view">
+      <section class="facts" id="facts">
         <h3>Facts</h3>
         <ul id="facts-list" class="facts-list"></ul>
-      </article>
-      <article class="tools" id="tools">
+      </section>
+      <section class="tools" id="tools">
         <h3>Tools</h3>
-        <form action="#" id="tools-manual-try-form">
-          <p>
-            <label for="tools-manual-try">Try a password: </label>
-            <input type="text" id="tools-manual-try" autocomplete="off" />
-          </p>
-          <div id="tools-manual-try-alert"></div>
-        </form>
-        <p>
-          <button id="tools-try-common">
-            Try the 1000 most common passwords
-          </button>
-          <button id="tools-explain-common" type="button">?</button>
-        </p>
-        <div id="tools-common-passwords-result"></div>
-        <div id="tools-common-passwords-help"></div>
-      </article>
-    </section>
+        <div class="tab-section" data-tab-initial="strategy-manual">
+          <nav class="nav-tabs">
+            <button data-open-tab="strategy-manual">Manual try</button>
+            <button data-open-tab="strategy-common">Common Passwords</button>
+          </nav>
+          <article data-tab-id="strategy-manual">
+            <form action="#" id="tools-manual-try-form">
+              <p>
+                <label for="tools-manual-try">Try a password: </label>
+                <input type="text" id="tools-manual-try" autocomplete="off" />
+              </p>
+              <div id="tools-manual-try-alert"></div>
+            </form>
+          </article>
+          <article data-tab-id="strategy-common">
+            <p>
+              <button id="tools-try-common">
+                Try the 1000 most common passwords
+              </button>
+              <button id="tools-explain-common" type="button">?</button>
+            </p>
+            <div id="tools-common-passwords-result"></div>
+            <div id="tools-common-passwords-help"></div>
+          </article>
+        </div>
+      </section>
+    </div>
     <div class="case-pager">
       <button class="case-before" id="case-before">&lt;</button>
       <span class="case-label"

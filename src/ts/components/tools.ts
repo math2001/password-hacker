@@ -2,6 +2,7 @@ import { database } from "../database";
 import { EM } from "../EventManager";
 import { assert, escapeHTML, querySelector } from "../utils";
 import { AlertBox } from "./alertbox";
+import { Tabs } from "./tabs";
 
 const COMMON_PASSWORDS_HELP = `<p>Some passwords are used a lot, like
 <i>123456</i>, <i>superman</i> or <i>qwerty</i>. So hackers have made lists of
@@ -53,6 +54,8 @@ export class Tools {
       commonPasswords: new AlertBox("#tools-common-passwords-result"),
       commonPasswordsHelp: new AlertBox("#tools-common-passwords-help"),
     };
+
+    new Tabs(querySelector(".tab-section", querySelector("#tools")));
 
     EM.on("set-case", (index: number) => {
       assert(index >= 0);
