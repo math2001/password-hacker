@@ -1,10 +1,10 @@
 // password are base64 so that some smarty student can't just read the source
 // code to get all of the answer, at least he/she has to learn about base64.
 
-export type Facts = string[];
 export interface CaseData {
   password: string;
-  facts: Facts;
+  facts: string[];
+  images?: string[];
 }
 
 export const database: CaseData[] = [
@@ -25,5 +25,10 @@ export const database: CaseData[] = [
       "He loves riding his mountain bike",
       "He has 2 brothers",
     ],
+  },
+  {
+    password: "bmF0aGFuMTQ=",
+    facts: ["His name is Nathan", "He is born on the 14 Avril 2005"],
+    images: ["/assets/nathan.jpg"],
   },
 ];
