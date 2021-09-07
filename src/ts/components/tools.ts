@@ -56,6 +56,7 @@ export class Tools {
     };
 
     new Tabs(querySelector(".tab-section", querySelector("#tools")));
+    this.alerts.commonPasswordsHelp.show("info", COMMON_PASSWORDS_HELP);
 
     EM.on("set-case", (index: number) => {
       assert(index >= 0);
