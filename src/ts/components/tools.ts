@@ -3,6 +3,7 @@ import { EM } from "../EventManager";
 import { assert, escapeHTML, querySelector, sleep } from "../utils";
 import { AlertBox } from "./alertbox";
 import { Tabs } from "./tabs";
+import { TabPatternHandler } from "./TabPatternHandler";
 
 const COMMON_PASSWORDS_HELP = `<p>Some passwords are used a lot, like
 <i>123456</i>, <i>superman</i> or <i>qwerty</i>. So hackers have made lists of
@@ -65,11 +66,17 @@ export class Tools {
       },
     };
 
+    new TabPatternHandler(querySelector("[data-tab-id='strategy-pattern']"));
+
     this.caseIndex = 0;
     this.alerts = {
-      manualTry: new AlertBox("#tools-manual-try-alert"),
-      commonPasswords: new AlertBox("#tools-common-passwords-result"),
-      commonPasswordsHelp: new AlertBox("#tools-common-passwords-help"),
+      manualTry: new AlertBox(querySelector("#tools-manual-try-alert")),
+      commonPasswords: new AlertBox(
+        querySelector("#tools-common-passwords-result")
+      ),
+      commonPasswordsHelp: new AlertBox(
+        querySelector("#tools-common-passwords-help")
+      ),
     };
 
     this.elements.commonStatusBar.total.textContent =

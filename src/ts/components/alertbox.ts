@@ -1,6 +1,5 @@
 import "../../css/alertbox.css";
 import { EM } from "../EventManager";
-import { querySelector } from "../utils";
 
 const symbols = {
   failure: "✗",
@@ -16,11 +15,9 @@ export class AlertBox {
     close: HTMLElement;
   };
 
-  constructor(selector: string) {
-    const box = querySelector(selector);
-
-    const [symbol, message, close] = this._makeHtml(box);
-    this.elements = { box, symbol, message, close };
+  constructor(root: HTMLElement) {
+    const [symbol, message, close] = this._makeHtml(root);
+    this.elements = { box: root, symbol, message, close };
 
     this.elements.close.addEventListener("click", this.hide);
   }

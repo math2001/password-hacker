@@ -41,16 +41,22 @@
       </section>
       <section class="tools" id="tools">
         <h3>Tools</h3>
-        <div class="tab-section" data-tab-initial="strategy-manual">
+        <div class="tab-section" data-tab-initial="strategy-pattern">
           <nav class="nav-tabs">
             <button data-open-tab="strategy-manual">Manual try</button>
             <button data-open-tab="strategy-common">Common Passwords</button>
+            <button data-open-tab="strategy-pattern">Pattern</button>
           </nav>
           <article data-tab-id="strategy-manual">
             <form action="#" id="tools-manual-try-form">
-              <p>
+              <p class="tools-input-row">
                 <label for="tools-manual-try">Password: </label>
-                <input type="text" id="tools-manual-try" autocomplete="off" />
+                <input
+                  type="text"
+                  id="tools-manual-try"
+                  autocomplete="off"
+                  autocapitalize="off"
+                />
                 <button type="submit">Try</button>
               </p>
               <div id="tools-manual-try-alert"></div>
@@ -74,6 +80,28 @@
             </p>
             <div id="tools-common-passwords-result"></div>
             <div id="tools-common-passwords-help"></div>
+          </article>
+          <article data-tab-id="strategy-pattern">
+            <form action="#" id="tools-pattern-form">
+              <p class="tools-input-row">
+                <label for="tools-pattern">Pattern: </label>
+                <input
+                  type="text"
+                  id="tools-pattern"
+                  autocomplete="off"
+                  autocapitalize="off"
+                />
+                <button type="submit">Run</button>
+                <button type="button" id="tools-pattern-help">?</button>
+              </p>
+              <div id="tools-pattern-parseerror"></div>
+              <p>
+                <input type="checkbox" id="tools-swap-case" />
+                <label for="tools-swap-case">Swap case</label>
+              </p>
+              <p id="tools-pattern-status" class="tools-pattern-status"></p>
+            </form>
+            <div id="tools-pattern-alert"></div>
           </article>
         </div>
       </section>

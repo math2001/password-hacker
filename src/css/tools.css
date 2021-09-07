@@ -1,4 +1,4 @@
-input {
+input[type="text"] {
   border: 1px solid var(--light-grey);
   font-size: inherit;
   outline: none;
@@ -8,7 +8,7 @@ input {
   padding-left: 6px;
 }
 
-input:focus {
+input[type="text"]:focus {
   /* border-color: black; */
   /* border-left-width: 4px;
     padding-left: 3px; */
@@ -21,4 +21,14 @@ input:focus {
 
 .tools-try-common-status.hidden {
   display: none;
+}
+
+.tools-input-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.tools-input-row > input {
+  flex: 1;
 }
