@@ -8,9 +8,7 @@ import { Tools } from "./ts/components/tools";
 import "./ts/database.ts";
 import { EM } from "./ts/EventManager";
 
-const res = fetch(
-  "https://raw.githubusercontent.com/DavidWittman/wpxmlrpcbrute/master/wordlists/1000-most-common-passwords.txt"
-)
+const res = fetch("/assets/common-passwords-list.txt")
   .then((resp) => resp.text())
   .then((text) => text.split(/\n/g));
 
