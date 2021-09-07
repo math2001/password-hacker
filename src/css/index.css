@@ -13,13 +13,16 @@ body {
 
   --light-red: #ff7f7f;
   --dark-red: darkred;
+
+  --vlight-grey: #ccc;
+  --light-grey: #998b9f;
 }
 
 .header {
   display: flex;
   align-items: baseline;
   padding: 0 12px;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid var(--vlight-grey);
 }
 
 .header-title {

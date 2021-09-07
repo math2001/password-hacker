@@ -7,10 +7,13 @@
 }
 
 .nav-tabs > button {
-  border: 1px solid grey;
+  border: 1px solid var(--light-grey);
+  border-bottom: none;
   padding: 2px 12px;
   background: none;
   margin: 0;
+  padding-bottom: 3px;
+  margin-bottom: -1px;
 }
 
 .nav-tabs > button:not(:first-child) {
@@ -18,11 +21,13 @@
 }
 
 .nav-tabs > button.tab-selected {
-  border-bottom: none;
+  border-bottom: 1px solid white;
 }
 
 [data-tab-id] {
   display: none;
+  border: 1px solid var(--light-grey);
+  padding: 8px 12px;
 }
 
 [data-tab-id].tab-selected {
