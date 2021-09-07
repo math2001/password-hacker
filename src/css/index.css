@@ -66,7 +66,7 @@ button {
   font-size: inherit;
   font-family: inherit;
   background: none;
-  border: 1px solid grey;
+  border: 1px solid var(--light-grey);
   padding: 5px;
   cursor: pointer;
 }
@@ -75,6 +75,9 @@ button:disabled {
   cursor: initial;
 }
 
-button:not(:disabled):hover {
+button:hover {
   border-color: #222;
+}
+button:disabled:hover {
+  border-color: var(--light-grey);
 }
