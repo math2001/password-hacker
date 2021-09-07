@@ -1,63 +1,66 @@
 import { querySelector } from "../utils";
 
 const symbols = {
-    "failure": '✗',
-    "success": '✓',
-    "info": "ⓘ"
-}
+  failure: "✗",
+  success: "✓",
+  info: "ⓘ",
+};
 
 export class AlertBox {
-    elements: {
-        box: HTMLElement;
-        symbol: HTMLElement;
-        message: HTMLElement;
-        close: HTMLElement;
-    };
+  elements: {
+    box: HTMLElement;
+    symbol: HTMLElement;
+    message: HTMLElement;
+    close: HTMLElement;
+  };
 
-    constructor(selector: string) {
-        const box = querySelector(selector)
-        
-        const [symbol, message, close] = this._makeHtml(box)
-        this.elements = {box, symbol, message, close}
+  constructor(selector: string) {
+    const box = querySelector(selector);
 
-        this.elements.close.addEventListener('click', this.hide)
+    const [symbol, message, close] = this._makeHtml(box);
+    this.elements = { box, symbol, message, close };
+
+    this.elements.close.addEventListener("click", this.hide);
+  }
+
+  show = (type: Extract<keyof typeof symbols, string>, messageHTML: string) => {
+    this.elements.box.classList.remove("hidden");
+    this.elements.box.setAttribute("data-alert-type", type);
+    this.elements.symbol.textContent = symbols[type];
+    this.elements.message.innerHTML = messageHTML;
+  };
+
+  toggle = (
+    type: Extract<keyof typeof symbols, string>,
+    messageHTML: string
+  ) => {
+    if (this.elements.box.classList.contains("hidden")) {
+      this.show(type, messageHTML);
+    } else {
+      this.hide();
     }
+  };
 
-    show = (type: Extract<keyof typeof symbols, string>, messageHTML: string) => {
-        this.elements.box.classList.remove('hidden')
-        this.elements.box.setAttribute('data-alert-type', type)
-        this.elements.symbol.textContent = symbols[type]
-        this.elements.message.innerHTML = messageHTML;
-    }
+  hide = () => {
+    this.elements.box.classList.add("hidden");
+  };
 
-    toggle = (type: Extract<keyof typeof symbols, string>, messageHTML: string) => {
-        if (this.elements.box.classList.contains('hidden')) {
-            this.show(type, messageHTML)
-        } else {
-            this.hide()
-        }
-    }
+  private _makeHtml(box: HTMLElement): [HTMLElement, HTMLElement, HTMLElement] {
+    box.classList.add("hidden", "alertbox");
 
-    hide = () => {
-        this.elements.box.classList.add('hidden')
-    }
+    const symbol = document.createElement("span");
+    symbol.classList.add("alertbox-symbol");
+    const message = document.createElement("span");
+    message.classList.add("alertbox-message");
+    const close = document.createElement("button");
+    close.type = "button";
+    close.classList.add("alertbox-close");
+    close.innerHTML = "&times;";
 
-    private _makeHtml(box: HTMLElement): [HTMLElement, HTMLElement, HTMLElement] {
-        box.classList.add('hidden', 'alertbox')
+    box.appendChild(symbol);
+    box.appendChild(message);
+    box.appendChild(close);
 
-        const symbol = document.createElement('span')
-        symbol.classList.add("alertbox-symbol")
-        const message = document.createElement('span')
-        message.classList.add("alertbox-message")
-        const close = document.createElement('button')
-        close.type = "button"
-        close.classList.add("alertbox-close")
-        close.innerHTML = '&times;'
-
-        box.appendChild(symbol)
-        box.appendChild(message)
-        box.appendChild(close)
-        
-        return [symbol, message, close]
-    }
+    return [symbol, message, close];
+  }
 }

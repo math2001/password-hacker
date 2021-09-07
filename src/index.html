@@ -1,51 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet"> 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Password Hacker</title>
-</head>
-<body>
+  </head>
+  <body>
     <header class="header">
-        <h1 class="header-title">Password Hacker</h1>
-        <nav class="header-nav">
-            <ul>
-                <li><a href="#tutorial">Tutorial</a></li>
-                <li><a href="/how-to-be-safe-with-passwords">How to be safe with passwords</a></li>
-            </ul>
-        </nav>
-        <p><small><a href="https://github.com/math2001/password-hacker">math2001/password-hacker</a></small></p>
+      <h1 class="header-title">Password Hacker</h1>
+      <nav class="header-nav">
+        <ul>
+          <li><a href="#tutorial">Tutorial</a></li>
+          <li>
+            <a href="/how-to-be-safe-with-passwords"
+              >How to be safe with passwords</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <p>
+        <small
+          ><a href="https://github.com/math2001/password-hacker"
+            >math2001/password-hacker</a
+          ></small
+        >
+      </p>
     </header>
     <section class="view">
-        <article class="facts" id="facts">
-            <h3>Facts</h3>
-            <ul id="facts-list" class="facts-list"></ul>
-        </article>
-        <article class="tools" id="tools">
-            <h3>Tools</h3>
-            <form action="#" id="tools-manual-try-form">
-                <p>
-                    <label for="tools-manual-try">Try a password: </label>
-                    <input type="text" id="tools-manual-try" autocomplete="off">
-                </p>
-                <div id="tools-manual-try-alert"></div>
-            </form>
-            <p>
-                <button id="tools-try-common">Try the 1000 most common passwords</button>
-                <button id="tools-explain-common" type="button">?</button>
-            </p>
-            <div id="tools-common-passwords-result"></div>
-            <div id="tools-common-passwords-help"></div>
-        </article>
+      <article class="facts" id="facts">
+        <h3>Facts</h3>
+        <ul id="facts-list" class="facts-list"></ul>
+      </article>
+      <article class="tools" id="tools">
+        <h3>Tools</h3>
+        <form action="#" id="tools-manual-try-form">
+          <p>
+            <label for="tools-manual-try">Try a password: </label>
+            <input type="text" id="tools-manual-try" autocomplete="off" />
+          </p>
+          <div id="tools-manual-try-alert"></div>
+        </form>
+        <p>
+          <button id="tools-try-common">
+            Try the 1000 most common passwords
+          </button>
+          <button id="tools-explain-common" type="button">?</button>
+        </p>
+        <div id="tools-common-passwords-result"></div>
+        <div id="tools-common-passwords-help"></div>
+      </article>
     </section>
     <div class="case-pager">
-        <button class="case-before" id="case-before">&lt;</button>
-        <span class="case-label">Case <span id="case-number">1</span>/<span id="case-total">1</span></span>
-        <button class="case-after" id="case-after">&gt;</button>
+      <button class="case-before" id="case-before">&lt;</button>
+      <span class="case-label"
+        >Case <span id="case-number">1</span>/<span id="case-total"
+          >1</span
+        ></span
+      >
+      <button class="case-after" id="case-after">&gt;</button>
     </div>
-</body>
+  </body>
 </html>

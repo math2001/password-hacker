@@ -1,71 +1,72 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Roboto Mono', Consolas, 'Courier New', Courier, monospace;
-    font-size: 14px;
-    margin: 0;
-    color: #222;
+  font-family: "Roboto Mono", Consolas, "Courier New", Courier, monospace;
+  font-size: 14px;
+  margin: 0;
+  color: #222;
 
-    --light-green: lightgreen;
-    --dark-green: darkgreen;
+  --light-green: lightgreen;
+  --dark-green: darkgreen;
 
-    --light-red: #FF7F7F;
-    --dark-red: darkred;
+  --light-red: #ff7f7f;
+  --dark-red: darkred;
 }
 
 .header {
-    display: flex;
-    align-items: baseline;
-    padding: 0 12px;
-    border-bottom: 2px solid #ccc;
+  display: flex;
+  align-items: baseline;
+  padding: 0 12px;
+  border-bottom: 2px solid #ccc;
 }
 
 .header-title {
-    margin: 12px;
-    margin-left: 0;
+  margin: 12px;
+  margin-left: 0;
 }
 
 .header-nav {
-    flex: 1;
+  flex: 1;
 }
 
 .header ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    gap: 12px;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 12px;
 }
 
 .header a {
-    color: inherit;
+  color: inherit;
 }
 
 .view {
-    display: flex;
-    max-width: 960px;
-    margin: auto;
+  display: flex;
+  max-width: 960px;
+  margin: auto;
 }
 
-.facts, .tools {
-    flex: 1;
-    padding: 4px 12px;
+.facts,
+.tools {
+  flex: 1;
+  padding: 4px 12px;
 }
 
 .case-pager {
-    margin-top: 12px;
-    text-align: center;
+  margin-top: 12px;
+  text-align: center;
 }
 
 button {
-    font-size: inherit;
-    font-family: inherit;
-    background: none;
-    border: 1px solid grey;
-    padding: 5px;
-    cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  background: none;
+  border: 1px solid grey;
+  padding: 5px;
+  cursor: pointer;
 }
 button:hover {
-    border-color: #222;
+  border-color: #222;
 }
