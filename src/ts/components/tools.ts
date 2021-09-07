@@ -37,8 +37,10 @@ export class Tools {
       current: HTMLElement;
     };
   };
+
   caseIndex: number;
   commonPasswords: string[];
+
   alerts: {
     manualTry: AlertBox;
     commonPasswords: AlertBox;
@@ -112,6 +114,7 @@ export class Tools {
     this.elements.tryCommon.addEventListener("click", async (e) => {
       this.alerts.commonPasswords.hide();
       this.elements.commonStatusBar.bar.classList.remove("hidden");
+      this.elements.tryCommon.disabled = true;
       // don't binary search, we simulate brute force testing
       const password = atob(database[this.caseIndex].password);
       const found = await this.runCommonPasswordsAnimation(password);
@@ -126,6 +129,7 @@ export class Tools {
           `Nah, couldn't find the password`
         );
       }
+      this.elements.tryCommon.disabled = false;
     });
 
     this.elements.explainCommon.addEventListener("click", (e) => {
