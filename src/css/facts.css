@@ -1,0 +1,12 @@
+.images-list {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.images-list img {
+  max-width: 256px;
+  max-height: 256px;
+}
