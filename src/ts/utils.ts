@@ -16,7 +16,7 @@ export function querySelector<T extends HTMLElement>(
   parent: HTMLElement | Document = document
 ): T {
   const el = parent.querySelector<T>(selector);
-  assert(el !== null);
+  if (el === null) throw new Error(`selector ${selector} returned null`);
   return el;
 }
 
