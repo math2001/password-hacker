@@ -27,8 +27,24 @@ export const database: CaseData[] = [
     ],
   },
   {
-    password: "bmF0aGFuMTQ=",
+    password: "c3VyZjE0",
     facts: ["His name is Nathan", "He is born on the 14 Avril 2005"],
     images: ["/assets/nathan.jpg"],
+  },
+  {
+    password: "aG9ja2V5MTA=",
+    facts: [
+      "Her name is Jessica",
+      "She plays hockey",
+      "She was state champion year 10!",
+    ],
+  },
+  {
+    password: "U21va2VZ",
+    facts: [
+      "Elsa has a cat called Smokey",
+      "She is in year 5",
+      "She was born in New Zealand",
+    ],
   },
 ];
