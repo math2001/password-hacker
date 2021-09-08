@@ -3,10 +3,10 @@
 import { database } from "../database";
 import { EM } from "../EventManager";
 import { PatternSolver, PATTERN_SOLVER_HELP } from "../PatternSolver";
-import { assert, querySelector, sleep } from "../utils";
+import { assert, durationToString, querySelector, sleep } from "../utils";
 import { AlertBox } from "./alertbox";
 
-const TEST_DELAY = 50;
+const TEST_DELAY_MS = 50;
 
 export class TabPatternHandler {
   private elements: {
@@ -75,11 +75,14 @@ export class TabPatternHandler {
 
     this.elements.form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      this.state = "running";
       this.lock();
       const found = await this.runPasswordAnimation(
         atob(database[this.caseIndex].password)
       );
       this.unlock();
+      this.state = "idle";
+      this.updateStatusBarForIdleAndError();
     });
   }
 
@@ -99,7 +102,7 @@ export class TabPatternHandler {
     const generator = this.ps.generate();
     for (let password of generator) {
       this.elements.statusBar.textContent = `${i}/${total}: trying "${password}"`;
-      await sleep(TEST_DELAY);
+      await sleep(TEST_DELAY_MS);
       if (password === truePassword) {
         for (let _ of generator) {
         } // consume generator
@@ -126,9 +129,12 @@ export class TabPatternHandler {
 
   private updateStatusBarForIdleAndError() {
     let content: string;
-    if (this.state === "idle")
-      content = `number of permutations to check: ${this.ps.numberOfPermutations()}`;
-    else if (this.state === "errored") content = "check errors";
+    if (this.state === "idle") {
+      const total = this.ps.numberOfPermutations();
+      content = `${total} permutations, takes about ${durationToString(
+        total * TEST_DELAY_MS
+      )}`;
+    } else if (this.state === "errored") content = "check errors";
     else assert(false);
     this.elements.statusBar.textContent = content;
   }
