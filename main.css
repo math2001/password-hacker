@@ -134,7 +134,10 @@ button:disabled:hover {
   text-decoration: none;
 }
 
-input[type="text"] {
+/* using :not([type]) is important, because the type="text" on inputs is stripped in dist, since it's the default */
+
+input[type="text"],
+input:not([type]) {
   border: 1px solid var(--light-grey);
   font-size: inherit;
   outline: none;
@@ -144,7 +147,8 @@ input[type="text"] {
   padding-left: 6px;
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus,
+input:not([type]):focus {
   /* border-color: black; */
   /* border-left-width: 4px;
     padding-left: 3px; */
