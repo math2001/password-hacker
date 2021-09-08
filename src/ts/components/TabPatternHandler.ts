@@ -97,7 +97,10 @@ export class TabPatternHandler {
       this.stopAnimation = false;
 
       if (state === "found") {
-        this.alerts.result.show("success", `Password is ${truePassword}`);
+        this.alerts.result.show(
+          "success",
+          `Password is <i>${truePassword}</i>`
+        );
       } else if (state === "not found") {
         this.alerts.result.show("failure", "Password not found");
       } // on cancel, we do nothing
