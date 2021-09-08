@@ -1,0 +1,263 @@
+.images-list {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.images-list img {
+  max-width: 256px;
+  max-height: 256px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto Mono", Consolas, "Courier New", Courier, monospace;
+  font-size: 14px;
+  margin: 0;
+  color: #222;
+
+  --light-green: lightgreen;
+  --dark-green: darkgreen;
+
+  --light-red: #ff7f7f;
+  --dark-red: darkred;
+
+  --vlight-grey: #ccc;
+  --light-grey: #998b9f;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  padding: 0 12px;
+  border-bottom: 2px solid var(--vlight-grey);
+}
+
+.header-title {
+  margin: 12px;
+  margin-left: 0;
+}
+
+.header-nav {
+  flex: 1;
+}
+
+.header ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 12px;
+}
+
+.header a {
+  color: inherit;
+}
+
+.view {
+  display: flex;
+  max-width: 960px;
+  margin: auto;
+}
+
+.facts,
+.tools {
+  flex: 1;
+  padding: 4px 12px;
+}
+
+.case-pager {
+  margin-top: 12px;
+  text-align: center;
+}
+
+button {
+  font-size: inherit;
+  font-family: inherit;
+  background: none;
+  border: 1px solid var(--light-grey);
+  padding: 5px;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: initial;
+}
+
+button:hover {
+  border-color: #222;
+}
+button:disabled:hover {
+  border-color: var(--light-grey);
+}
+
+.help-btn {
+  display: inline-flex;
+  border-radius: 100%;
+  color: white;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  background-color: #403241;
+  cursor: pointer;
+  border: 2px solid var(--vlight-grey);
+}
+
+.help-btn:hover {
+  background-color: #604a63;
+}
+
+.case-before,
+.case-after {
+  display: inline-block;
+  cursor: pointer;
+  /* outline: 1px solid black; */
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  border: none;
+  background: none;
+}
+.case-before:hover,
+.case-after:hover {
+  text-decoration: underline;
+}
+
+.case-before[disabled]:hover,
+.case-after[disabled]:hover {
+  text-decoration: none;
+}
+
+input[type="text"] {
+  border: 1px solid var(--light-grey);
+  font-size: inherit;
+  outline: none;
+  padding: 4px;
+  font-family: inherit;
+  width: 256px;
+  padding-left: 6px;
+}
+
+input[type="text"]:focus {
+  /* border-color: black; */
+  /* border-left-width: 4px;
+    padding-left: 3px; */
+  outline: 1px solid var(--light-grey);
+}
+
+.tools-try-common-status {
+  font-style: italic;
+}
+
+.tools-try-common-status.hidden {
+  display: none;
+}
+
+.tools-input-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.tools-input-row > input {
+  flex: 1;
+}
+
+.tools fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.alertbox {
+  display: flex;
+  margin: 12px 4px;
+}
+.alertbox.hidden {
+  display: none;
+}
+
+.alertbox[data-alert-type="success"] {
+  background-color: var(--light-green);
+  color: var(--dark-green);
+}
+.alertbox[data-alert-type="failure"] {
+  background-color: var(--light-red);
+  color: var(--dark-red);
+}
+.alertbox[data-alert-type="info"] {
+  background-color: #eee;
+}
+
+.alertbox-symbol {
+  font-size: 32px;
+  line-height: 32px;
+  display: flex;
+  /* width: 48px; */
+  padding: 0 8px;
+  align-items: center;
+  justify-content: center;
+  margin: 4px 0;
+}
+
+.alertbox-close {
+  display: inline-flex;
+  font-size: 16px;
+  justify-content: center;
+  width: 28px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  cursor: pointer;
+  color: inherit;
+}
+
+.alertbox-message {
+  flex: 1;
+  align-self: center;
+  margin: 4px 0;
+}
+
+/* .nav-tabs {
+  border: 1px solid black;
+} */
+
+.nav-tabs {
+  display: flex;
+}
+
+.nav-tabs > button {
+  border: 1px solid var(--light-grey);
+  border-bottom: none;
+  padding: 2px 12px;
+  background: none;
+  margin: 0;
+  padding-bottom: 3px;
+  margin-bottom: -1px;
+}
+
+.nav-tabs > button:not(:first-child) {
+  border-left: none;
+}
+
+.nav-tabs > button.tab-selected {
+  border-bottom: 1px solid white;
+}
+
+[data-tab-id] {
+  display: none;
+  border: 1px solid var(--light-grey);
+  padding: 8px 12px;
+}
+
+[data-tab-id].tab-selected {
+  display: block;
+}
+
