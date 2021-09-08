@@ -77,10 +77,15 @@ export class TabPatternHandler {
       e.preventDefault();
       this.state = "running";
       this.lock();
-      const found = await this.runPasswordAnimation(
-        atob(database[this.caseIndex].password)
-      );
+      this.alerts.result.hide();
+      const truePassword = atob(database[this.caseIndex].password);
+      const found = await this.runPasswordAnimation(truePassword);
       this.unlock();
+      if (found) {
+        this.alerts.result.show("success", `Password is ${truePassword}`);
+      } else {
+        this.alerts.result.show("failure", "Password not found");
+      }
       this.state = "idle";
       this.updateStatusBarForIdleAndError();
     });
