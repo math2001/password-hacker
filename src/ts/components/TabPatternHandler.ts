@@ -35,7 +35,7 @@ export class TabPatternHandler {
       form: querySelector("#tools-pattern-form", root),
       fieldset: querySelector("#tools-pattern-fieldset", root),
       pattern: querySelector("#tools-pattern", root),
-      helpBtn: querySelector("#tools-pattern-help", root),
+      helpBtn: querySelector("#tools-pattern-helpbtn", root),
       swapcase: querySelector("#tools-swap-case", root),
       statusBar: querySelector("#tools-pattern-status", root),
     };
