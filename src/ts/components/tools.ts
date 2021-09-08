@@ -105,6 +105,7 @@ export class Tools {
       this.alerts.commonPasswords.hide();
       this.elements.commonStatusBar.bar.classList.remove("hidden");
       this.elements.tryCommon.disabled = true;
+      EM.emit("lock", undefined);
       // don't binary search, we simulate brute force testing
       const password = atob(database[this.caseIndex].password);
       const found = await this.runCommonPasswordsAnimation(password);
@@ -120,6 +121,7 @@ export class Tools {
         );
       }
       this.elements.tryCommon.disabled = false;
+      EM.emit("unlock", undefined);
     });
 
     this.elements.explainCommon.addEventListener("click", (e) => {

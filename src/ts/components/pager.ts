@@ -27,6 +27,16 @@ export class Pager {
       this.elements.number.textContent = (this.index + 1).toString();
     });
 
+    EM.on("lock", () => {
+      this.elements.before.disabled = true;
+      this.elements.after.disabled = true;
+    });
+
+    EM.on("unlock", () => {
+      this.elements.before.disabled = false;
+      this.elements.after.disabled = false;
+    });
+
     this.elements.before.addEventListener("click", (e) => {
       EM.emit("set-case", this.index - 1);
     });
