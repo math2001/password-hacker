@@ -159,6 +159,6 @@ available.
 </p>
 
 <p>
-This button tests every single password in <a href="/assets/common-passwords-list.txt">this list</a>.
+This button tests every single password in <a href="assets/common-passwords-list.txt">this list</a>.
 </p>
 `;
