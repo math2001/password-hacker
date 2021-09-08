@@ -1,6 +1,6 @@
 .alertbox {
   display: flex;
-  margin: 12px 4px;
+  margin: 12px 0;
 }
 .alertbox.hidden {
   display: none;
