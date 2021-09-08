@@ -1,3 +1,7 @@
+.facts-title {
+  display: inline-block;
+}
+
 .images-list {
   padding: 0;
   list-style: none;
@@ -9,6 +13,17 @@
 .images-list img {
   max-width: 256px;
   max-height: 256px;
+}
+
+.fact-lists {
+  display: flex;
+  justify-content: center;
+}
+
+.case-pager {
+  display: inline-block;
+  margin-top: 12px;
+  text-align: center;
 }
 
 * {
@@ -59,7 +74,6 @@ body {
 }
 
 .view {
-  display: flex;
   max-width: 960px;
   margin: auto;
 }
@@ -68,11 +82,6 @@ body {
 .tools {
   flex: 1;
   padding: 4px 12px;
-}
-
-.case-pager {
-  margin-top: 12px;
-  text-align: center;
 }
 
 button {
@@ -187,9 +196,19 @@ input:not([type]):focus {
   margin-bottom: 0;
 }
 
+.tools-common-main-row {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.tools-common-main-row > button {
+  flex: 1;
+}
+
 .alertbox {
   display: flex;
-  margin: 12px 4px;
+  margin: 12px 0;
 }
 .alertbox.hidden {
   display: none;
