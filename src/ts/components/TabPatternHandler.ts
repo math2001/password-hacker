@@ -88,18 +88,18 @@ export class TabPatternHandler {
       this.alerts.result.hide();
       this.elements.cancelBtn.classList.remove("hidden");
       const truePassword = atob(database[this.caseIndex].password);
-      const found = await this.runPasswordAnimation(truePassword);
+      const state = await this.runPasswordAnimation(truePassword);
       this.unlock();
 
       this.state = "idle";
       this.elements.cancelBtn.classList.add("hidden");
       this.stopAnimation = false;
 
-      if (found) {
+      if (state === "found") {
         this.alerts.result.show("success", `Password is ${truePassword}`);
-      } else {
+      } else if (state === "not found") {
         this.alerts.result.show("failure", "Password not found");
-      }
+      } // on cancel, we do nothing
 
       this.updateStatusBarForIdleAndError();
     });
@@ -115,22 +115,27 @@ export class TabPatternHandler {
   }
 
   // return true if the true password was found
-  private async runPasswordAnimation(truePassword: string): Promise<boolean> {
+  private async runPasswordAnimation(
+    truePassword: string
+  ): Promise<"found" | "canceled" | "not found"> {
     let i = 1;
     const total = this.ps.numberOfPermutations();
     const generator = this.ps.generate();
     for (let password of generator) {
       this.elements.statusBar.textContent = `${i}/${total}: trying "${password}"`;
-      if (this.stopAnimation) generator.throw(null);
+      if (this.stopAnimation) {
+        generator.throw(null);
+        this.stopAnimation = false;
+        return "canceled";
+      }
       await sleep(TEST_DELAY_MS);
       if (password === truePassword) {
         generator.throw(null);
-        return true;
+        return "found";
       }
       i++;
     }
-    this.stopAnimation = false;
-    return false;
+    return "not found";
   }
 
   private updatePattern = () => {
