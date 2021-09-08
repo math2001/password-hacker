@@ -63,6 +63,7 @@ export class TabPatternHandler {
   }
 
   private bindDOM() {
+    this.alerts.help.show("info", `<pre>${PATTERN_SOLVER_HELP}</pre>`);
     this.elements.helpBtn.addEventListener("click", () => {
       this.alerts.help.toggle("info", `<pre>${PATTERN_SOLVER_HELP}</pre>`);
     });
