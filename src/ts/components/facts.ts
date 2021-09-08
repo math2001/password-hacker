@@ -11,7 +11,7 @@ export class Facts {
 
   constructor() {
     this.elements = {
-      factsList: querySelector("#facts-list"),
+      factsList: querySelector("#text-list"),
       imagesList: querySelector("#images-list"),
     };
 

@@ -46,7 +46,6 @@ body {
 }
 
 .view {
-  display: flex;
   max-width: 960px;
   margin: auto;
 }
@@ -55,6 +54,11 @@ body {
 .tools {
   flex: 1;
   padding: 4px 12px;
+}
+
+.fact-lists {
+  display: flex;
+  justify-content: center;
 }
 
 .case-pager {
