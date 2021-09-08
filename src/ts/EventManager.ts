@@ -3,6 +3,8 @@ import { AlertBox } from "./components/alertbox";
 export interface Events {
   "alert-close": AlertBox;
   "set-case": number;
+  lock: void;
+  unlock: void;
 }
 
 interface keystring {

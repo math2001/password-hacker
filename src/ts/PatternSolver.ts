@@ -21,48 +21,61 @@ Examples:
 `;
 
 export class PatternSolver {
-  private buf: string[];
-  private length: number;
+  public buf: string[];
+  public buflength: number;
+
   private parsedPattern: string[];
+  private generating: boolean;
   private opt: Options;
 
   constructor() {
     this.buf = new Array(4096);
-    this.length = 0;
+    this.buflength = 0;
     this.parsedPattern = [];
     this.opt = {
       swapcase: false,
     };
+    this.generating = false;
   }
 
   setOption<T extends keyof Options>(name: T, value: Options[T]) {
+    if (this.generating) throw new Error("finish consuming generator first");
     this.opt[name] = value;
   }
 
-  numberOfPermutations(): number {
+  numberOfPermutations(partLengths?: number[]): number {
     let total: number = 1;
     for (let part of this.parsedPattern) {
-      if (part.length === 1 && isLetter(part) && this.opt.swapcase) {
-        total *= 2;
-      } else if (part === "\\p") {
-        total *= PUNCTUATION_SYMBOLS.length;
-      } else if (part === "\\d") {
-        total *= 10;
-      } else if (part.startsWith("\\s")) {
-        total *= 2;
-      }
-      // otherwise, we the part is static (ie. always the same) and thus the
-      // total number of permutations doesn't change
+      const length = this.expandPartLength(part);
+      total *= length;
+      if (partLengths) partLengths.push(length);
     }
     return total;
   }
 
   *generate() {
-    yield "foo";
-    yield "bar";
+    const lengths: number[] = [];
+    const total = this.numberOfPermutations(lengths);
+    this.buflength = this.parsedPattern.length;
+    this.generating = true;
+
+    for (let i = 0; i < total; i++) {
+      // generate the ith permutation
+      let consumed = 1;
+      for (let j = this.parsedPattern.length - 1; j >= 0; j--) {
+        this.buf[j] = this.expandPartIth(
+          this.parsedPattern[j],
+          Math.floor(i / consumed) % lengths[j]
+        );
+        consumed *= lengths[j];
+      }
+      yield this.buf.slice(0, this.buflength).join("");
+    }
+    this.generating = false;
   }
 
   setPattern(pattern: string): error | null {
+    if (this.generating) throw new Error("finish consuming generator first");
     try {
       this.parse(pattern);
     } catch (err) {
@@ -105,6 +118,28 @@ export class PatternSolver {
         this.parsedPattern.push(char);
       }
     }
+  }
+
+  private expandPartLength(part: string): number {
+    if (part.length === 1 && isLetter(part) && this.opt.swapcase) return 2;
+    if (part === "\\p") return PUNCTUATION_SYMBOLS.length;
+    if (part === "\\d") return 10;
+    if (part.startsWith("\\s")) return 2;
+    return 1;
+  }
+
+  private expandPartIth(part: string, ith: number): string {
+    if (part.length === 1 && isLetter(part) && this.opt.swapcase) {
+      if (ith === 0) return part.toLowerCase();
+      if (ith === 1) return part.toUpperCase();
+    }
+    if (part === "\\p") return PUNCTUATION_SYMBOLS[ith];
+    if (part === "\\d") return String.fromCharCode(ith + "0".charCodeAt(0));
+    if (part.startsWith("\\s")) {
+      if (ith === 0) return part[part.length - 1].toLowerCase();
+      if (ith === 1) return part[part.length - 1].toUpperCase();
+    }
+    return part;
   }
 }
 

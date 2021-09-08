@@ -2,26 +2,8 @@ import { database } from "../database";
 import { EM } from "../EventManager";
 import { assert, escapeHTML, querySelector, sleep } from "../utils";
 import { AlertBox } from "./alertbox";
-import { Tabs } from "./tabs";
 import { TabPatternHandler } from "./TabPatternHandler";
-
-const COMMON_PASSWORDS_HELP = `<p>Some passwords are used a lot, like
-<i>123456</i>, <i>superman</i> or <i>qwerty</i>. So hackers have made lists of
-the most common passwords, and then test them all when trying to break into your
-account.</p>
-
-<p>
-<a href="https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10-million-password-list-top-10000.txt">Some</a>
-<a href="https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10k-most-common.txt">lists</a>
-<a href="https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10-million-password-list-top-1000000.txt">are</a>
-<a href="https://raw.githubusercontent.com/DavidWittman/wpxmlrpcbrute/master/wordlists/1000-most-common-passwords.txt">publicly</a>
-available.
-</p>
-
-<p>
-This button tests every single password in <a href="/assets/common-passwords-list.txt">this list</a>.
-</p>
-`;
+import { Tabs } from "./tabs";
 
 export class Tools {
   elements: {
@@ -145,7 +127,9 @@ export class Tools {
     });
   }
 
-  private async runCommonPasswordsAnimation(truePassword: string) {
+  private async runCommonPasswordsAnimation(
+    truePassword: string
+  ): Promise<boolean> {
     let i = 1;
     for (let cp of this.commonPasswords) {
       this.elements.commonStatusBar.index.textContent = i.toString();
@@ -159,3 +143,21 @@ export class Tools {
     return false;
   }
 }
+
+const COMMON_PASSWORDS_HELP = `<p>Some passwords are used a lot, like
+<i>123456</i>, <i>superman</i> or <i>qwerty</i>. So hackers have made lists of
+the most common passwords, and then test them all when trying to break into your
+account.</p>
+
+<p>
+<a href="https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10-million-password-list-top-10000.txt">Some</a>
+<a href="https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10k-most-common.txt">lists</a>
+<a href="https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Common-Credentials/10-million-password-list-top-1000000.txt">are</a>
+<a href="https://raw.githubusercontent.com/DavidWittman/wpxmlrpcbrute/master/wordlists/1000-most-common-passwords.txt">publicly</a>
+available.
+</p>
+
+<p>
+This button tests every single password in <a href="/assets/common-passwords-list.txt">this list</a>.
+</p>
+`;
