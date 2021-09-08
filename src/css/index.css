@@ -56,16 +56,6 @@ body {
   padding: 4px 12px;
 }
 
-.fact-lists {
-  display: flex;
-  justify-content: center;
-}
-
-.case-pager {
-  margin-top: 12px;
-  text-align: center;
-}
-
 button {
   font-size: inherit;
   font-family: inherit;
