@@ -3,7 +3,7 @@ import { database } from "../database";
 import { EM } from "../EventManager";
 import { assert, escapeHTML, querySelector, sleep } from "../utils";
 import { AlertBox } from "./alertbox";
-import { TabPatternHandler } from "./TabPatternHandler";
+import { TabPatternHandler, TEST_DELAY_MS } from "./TabPatternHandler";
 import { Tabs } from "./tabs";
 
 export class Tools {
@@ -135,7 +135,7 @@ export class Tools {
     for (let cp of this.commonPasswords) {
       this.elements.commonStatusBar.index.textContent = i.toString();
       this.elements.commonStatusBar.current.textContent = cp;
-      await sleep(100);
+      await sleep(TEST_DELAY_MS);
       if (cp === truePassword) {
         return true;
       }

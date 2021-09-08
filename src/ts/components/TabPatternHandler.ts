@@ -6,7 +6,7 @@ import { PatternSolver, PATTERN_SOLVER_HELP } from "../PatternSolver";
 import { assert, durationToString, querySelector, sleep } from "../utils";
 import { AlertBox } from "./alertbox";
 
-const TEST_DELAY_MS = 50;
+export const TEST_DELAY_MS = 50;
 
 export class TabPatternHandler {
   private elements: {
