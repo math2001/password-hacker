@@ -1,6 +1,6 @@
 // the pattern tab in tools
 
-import { PatternSolver } from "../PatternSolver";
+import { PatternSolver, PATTERN_SOLVER_HELP } from "../PatternSolver";
 import { querySelector } from "../utils";
 import { AlertBox } from "./alertbox";
 
@@ -38,15 +38,15 @@ export class TabPatternHandler {
     this.patternSolver = new PatternSolver();
 
     this.bindDOM();
+    this.updatePattern();
   }
 
   private bindDOM() {
-    this.elements.pattern.addEventListener("input", (e) => {
-      const err = this.patternSolver.setPattern(this.elements.pattern.value);
-      if (err !== null) this.alerts.parseError.show("failure", err);
-      else this.alerts.parseError.hide();
-      this.updateStatusBar();
+    this.elements.helpBtn.addEventListener("click", () => {
+      this.alerts.help.toggle("info", `<pre>${PATTERN_SOLVER_HELP}</pre>`);
     });
+
+    this.elements.pattern.addEventListener("input", this.updatePattern);
 
     this.patternSolver.setOption("swapcase", this.elements.swapcase.checked);
     this.elements.swapcase.addEventListener("change", (e) => {
@@ -54,6 +54,13 @@ export class TabPatternHandler {
       this.updateStatusBar();
     });
   }
+
+  private updatePattern = () => {
+    const err = this.patternSolver.setPattern(this.elements.pattern.value);
+    if (err !== null) this.alerts.parseError.show("failure", err);
+    else this.alerts.parseError.hide();
+    this.updateStatusBar();
+  };
 
   private updateStatusBar() {
     const content = `number of permutations to check: ${this.patternSolver.numberOfPermutations()}`;

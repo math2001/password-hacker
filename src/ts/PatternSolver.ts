@@ -4,12 +4,12 @@ interface Options {
   swapcase: boolean;
 }
 
-export const PUNCTUATION_SYMBOLS = "<>?,./!@#$%^&*()_+-=~`{}[]:\";'";
+export const PUNCTUATION_SYMBOLS = "<>?,./!@#$%^&*() _+-=~`{}[]:\";'";
 export const PATTERN_SOLVER_HELP = String.raw`
 features:
   - \d: replaces with digits between 0-9 inclusive
-  - \sX: try with lower and upper X
-  - \p: replaces with punctuation symbols
+  - \sX: try with lower and upper case X
+  - \p: try with punctuation symbols
   - \\: literal backslash
 
 Punctuation symbols: ${PUNCTUATION_SYMBOLS}
@@ -46,7 +46,7 @@ export class PatternSolver {
         total *= 2;
       } else if (part === "\\p") {
         total *= PUNCTUATION_SYMBOLS.length;
-      } else if (part === "d") {
+      } else if (part === "\\d") {
         total *= 10;
       } else if (part.startsWith("\\s")) {
         total *= 2;
