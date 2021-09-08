@@ -1,7 +1,6 @@
 import "./css/facts.css";
 import "./css/index.css";
 import "./css/pager.css";
-import "./css/tools.css";
 import { Facts } from "./ts/components/facts";
 import { Pager } from "./ts/components/pager";
 import { Tools } from "./ts/components/tools";

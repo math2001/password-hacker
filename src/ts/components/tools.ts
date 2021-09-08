@@ -1,3 +1,4 @@
+import "../../css/tools.css";
 import { database } from "../database";
 import { EM } from "../EventManager";
 import { assert, escapeHTML, querySelector, sleep } from "../utils";
