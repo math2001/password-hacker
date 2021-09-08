@@ -46,3 +46,13 @@ input:not([type]):focus {
 .tools-pattern-status {
   margin-bottom: 0;
 }
+
+.tools-common-main-row {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.tools-common-main-row > button {
+  flex: 1;
+}

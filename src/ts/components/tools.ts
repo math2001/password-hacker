@@ -7,12 +7,13 @@ import { TabPatternHandler, TEST_DELAY_MS } from "./TabPatternHandler";
 import { Tabs } from "./tabs";
 
 export class Tools {
-  elements: {
+  private elements: {
     manualTryForm: HTMLFormElement;
     manualTry: HTMLInputElement;
 
     tryCommon: HTMLButtonElement;
     explainCommon: HTMLButtonElement;
+    cancelCommon: HTMLButtonElement;
 
     commonStatusBar: {
       bar: HTMLElement;
@@ -22,10 +23,11 @@ export class Tools {
     };
   };
 
-  caseIndex: number;
-  commonPasswords: string[];
+  private caseIndex: number;
+  private commonPasswords: string[];
+  private stopAnimation: boolean;
 
-  alerts: {
+  private alerts: {
     manualTry: AlertBox;
     commonPasswords: AlertBox;
     commonPasswordsHelp: AlertBox;
@@ -33,6 +35,7 @@ export class Tools {
 
   constructor(commonPasswords: string[]) {
     this.commonPasswords = commonPasswords;
+    this.stopAnimation = false;
 
     this.elements = {
       manualTry: querySelector("#tools-manual-try"),
@@ -40,6 +43,7 @@ export class Tools {
 
       tryCommon: querySelector("#tools-try-common"),
       explainCommon: querySelector("#tools-explain-common"),
+      cancelCommon: querySelector("#tools-common-cancel"),
 
       commonStatusBar: {
         bar: querySelector("#tools-try-common-status"),
@@ -102,19 +106,20 @@ export class Tools {
     });
 
     this.elements.tryCommon.addEventListener("click", async (e) => {
+      this.elements.cancelCommon.classList.remove("hidden");
       this.alerts.commonPasswords.hide();
       this.elements.commonStatusBar.bar.classList.remove("hidden");
       this.elements.tryCommon.disabled = true;
       EM.emit("lock", undefined);
       // don't binary search, we simulate brute force testing
       const password = atob(database[this.caseIndex].password);
-      const found = await this.runCommonPasswordsAnimation(password);
-      if (found) {
+      const state = await this.runCommonPasswordsAnimation(password);
+      if (state === "found") {
         this.alerts.commonPasswords.show(
           "success",
           `Found the password! It's <i>${password}</i>`
         );
-      } else {
+      } else if (state === "not found") {
         this.alerts.commonPasswords.show(
           "failure",
           `Nah, couldn't find the password`
@@ -122,6 +127,12 @@ export class Tools {
       }
       this.elements.tryCommon.disabled = false;
       EM.emit("unlock", undefined);
+      this.elements.cancelCommon.classList.add("hidden");
+    });
+
+    this.elements.cancelCommon.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.stopAnimation = true;
     });
 
     this.elements.explainCommon.addEventListener("click", (e) => {
@@ -132,18 +143,22 @@ export class Tools {
 
   private async runCommonPasswordsAnimation(
     truePassword: string
-  ): Promise<boolean> {
+  ): Promise<"found" | "not found" | "canceled"> {
     let i = 1;
     for (let cp of this.commonPasswords) {
       this.elements.commonStatusBar.index.textContent = i.toString();
       this.elements.commonStatusBar.current.textContent = cp;
+      if (this.stopAnimation) {
+        this.stopAnimation = false;
+        return "canceled";
+      }
       await sleep(TEST_DELAY_MS);
       if (cp === truePassword) {
-        return true;
+        return "found";
       }
       i++;
     }
-    return false;
+    return "not found";
   }
 }
 
