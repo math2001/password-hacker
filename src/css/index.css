@@ -81,3 +81,21 @@ button:hover {
 button:disabled:hover {
   border-color: var(--light-grey);
 }
+
+.help-btn {
+  display: inline-flex;
+  border-radius: 100%;
+  color: white;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  background-color: #403241;
+  cursor: pointer;
+  border: 2px solid var(--vlight-grey);
+}
+
+.help-btn:hover {
+  background-color: #7c5f7d;
+}

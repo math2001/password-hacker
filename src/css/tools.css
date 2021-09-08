@@ -32,3 +32,9 @@ input[type="text"]:focus {
 .tools-input-row > input {
   flex: 1;
 }
+
+.tools fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
