@@ -42,3 +42,7 @@ input:not([type]):focus {
   padding: 0;
   margin: 0;
 }
+
+.tools-pattern-status {
+  margin-bottom: 0;
+}

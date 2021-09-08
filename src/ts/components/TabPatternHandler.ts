@@ -16,6 +16,7 @@ export class TabPatternHandler {
     helpBtn: HTMLElement;
     swapcase: HTMLInputElement;
     statusBar: HTMLElement;
+    cancelBtn: HTMLElement;
   };
 
   private alerts: {
@@ -24,11 +25,10 @@ export class TabPatternHandler {
     result: AlertBox;
   };
 
-  caseIndex: number;
-
+  private caseIndex: number;
   private state: "running" | "errored" | "idle";
-
   private ps: PatternSolver;
+  private stopAnimation: boolean;
 
   constructor(root: HTMLElement) {
     this.elements = {
@@ -38,6 +38,7 @@ export class TabPatternHandler {
       helpBtn: querySelector("#tools-pattern-helpbtn", root),
       swapcase: querySelector("#tools-swap-case", root),
       statusBar: querySelector("#tools-pattern-status", root),
+      cancelBtn: querySelector("#tools-pattern-cancel"),
     };
     this.alerts = {
       help: new AlertBox(querySelector("#tools-pattern-help", root)),
@@ -50,6 +51,7 @@ export class TabPatternHandler {
     this.ps = new PatternSolver();
 
     this.state = "idle";
+    this.stopAnimation = false;
 
     this.bindDOM();
     this.updatePattern();
@@ -65,6 +67,11 @@ export class TabPatternHandler {
       this.alerts.help.toggle("info", `<pre>${PATTERN_SOLVER_HELP}</pre>`);
     });
 
+    this.elements.cancelBtn.classList.add("hidden");
+    this.elements.cancelBtn.addEventListener("click", () => {
+      this.stopAnimation = true;
+    });
+
     this.elements.pattern.addEventListener("input", this.updatePattern);
 
     this.ps.setOption("swapcase", this.elements.swapcase.checked);
@@ -76,17 +83,24 @@ export class TabPatternHandler {
     this.elements.form.addEventListener("submit", async (e) => {
       e.preventDefault();
       this.state = "running";
+
       this.lock();
       this.alerts.result.hide();
+      this.elements.cancelBtn.classList.remove("hidden");
       const truePassword = atob(database[this.caseIndex].password);
       const found = await this.runPasswordAnimation(truePassword);
       this.unlock();
+
+      this.state = "idle";
+      this.elements.cancelBtn.classList.add("hidden");
+      this.stopAnimation = false;
+
       if (found) {
         this.alerts.result.show("success", `Password is ${truePassword}`);
       } else {
         this.alerts.result.show("failure", "Password not found");
       }
-      this.state = "idle";
+
       this.updateStatusBarForIdleAndError();
     });
   }
@@ -107,14 +121,15 @@ export class TabPatternHandler {
     const generator = this.ps.generate();
     for (let password of generator) {
       this.elements.statusBar.textContent = `${i}/${total}: trying "${password}"`;
+      if (this.stopAnimation) generator.throw(null);
       await sleep(TEST_DELAY_MS);
       if (password === truePassword) {
-        for (let _ of generator) {
-        } // consume generator
+        generator.throw(null);
         return true;
       }
       i++;
     }
+    this.stopAnimation = false;
     return false;
   }
 

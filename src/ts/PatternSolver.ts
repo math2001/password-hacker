@@ -38,12 +38,12 @@ export class PatternSolver {
     this.generating = false;
   }
 
-  setOption<T extends keyof Options>(name: T, value: Options[T]) {
+  public setOption<T extends keyof Options>(name: T, value: Options[T]) {
     if (this.generating) throw new Error("finish consuming generator first");
     this.opt[name] = value;
   }
 
-  numberOfPermutations(partLengths?: number[]): number {
+  public numberOfPermutations(partLengths?: number[]): number {
     let total: number = 1;
     for (let part of this.parsedPattern) {
       const length = this.expandPartLength(part);
@@ -53,13 +53,17 @@ export class PatternSolver {
     return total;
   }
 
-  *generate() {
+  /*
+   * User must consume the entire generator, or throw the generator (ie.
+   * gen.throw(null))
+   */
+  public *generate() {
     const lengths: number[] = [];
     const total = this.numberOfPermutations(lengths);
     this.buflength = this.parsedPattern.length;
     this.generating = true;
 
-    for (let i = 0; i < total; i++) {
+    loop: for (let i = 0; i < total; i++) {
       // generate the ith permutation
       let consumed = 1;
       for (let j = this.parsedPattern.length - 1; j >= 0; j--) {
@@ -69,7 +73,12 @@ export class PatternSolver {
         );
         consumed *= lengths[j];
       }
-      yield this.buf.slice(0, this.buflength).join("");
+      const str = this.buf.slice(0, this.buflength).join("");
+      try {
+        yield str;
+      } catch (err) {
+        break loop;
+      }
     }
     this.generating = false;
   }

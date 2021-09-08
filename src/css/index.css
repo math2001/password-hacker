@@ -82,6 +82,10 @@ button:disabled:hover {
   border-color: var(--light-grey);
 }
 
+button.hidden {
+  display: none;
+}
+
 .help-btn {
   display: inline-flex;
   border-radius: 100%;
